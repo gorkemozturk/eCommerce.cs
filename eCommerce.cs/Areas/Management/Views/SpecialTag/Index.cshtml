@@ -1,0 +1,41 @@
+﻿@model IEnumerable<eCommerce.cs.Data.Entities.SpecialTag>
+@{
+    ViewData["Title"] = "Special Tags";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        SPECIAL TAGS
+    </div>
+    <div class="panel-body text-right">
+        <a asp-action="Create" class="btn btn-primary btn-sm">Create a New Special Tag</a>
+    </div>
+    <hr style="margin: 0" />
+    <div style="padding: 0" class="panel-body">
+        <table style="margin: 0" class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-md-4">@Html.DisplayNameFor(model => model.TagID)</th>
+                    <th class="col-md-4">@Html.DisplayNameFor(model => model.TagName)</th>
+                    <th class="col-md-4 text-center">İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-md-4">
+                            @Html.DisplayFor(modelItem => item.TagID)
+                        </td>
+                        <td class="col-md-4">
+                            @Html.DisplayFor(modelItem => item.TagName)
+                        </td>
+                        <td class="col-md-4 text-center">
+                            <partial name="_TableButtonsPartial" model="item.TagID" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

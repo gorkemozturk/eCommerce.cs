@@ -1,0 +1,38 @@
+﻿@model eCommerce.cs.Data.Entities.SpecialTag
+@{
+    ViewData["Title"] = "Special Tags";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        CREATE A NEW SPECIAL TAG
+    </div>
+    <div class="panel-body">
+        <form method="post" asp-action="Create" class="form-horizontal">
+            <div class="form-group">
+                <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                <label asp-for="TagName" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="TagName" class="form-control" autocomplete="off">
+                    <span asp-validation-for="TagName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a asp-action="Index" class="btn btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Back to List
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts 
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
