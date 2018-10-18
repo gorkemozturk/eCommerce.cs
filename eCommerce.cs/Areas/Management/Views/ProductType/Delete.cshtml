@@ -14,10 +14,9 @@
     <div class="panel-body text-center">
         <a asp-action="Index" class="btn btn-default">
             <span class="glyphicon glyphicon-chevron-left"></span>
-            Back
+            Back to List
         </a>
         <button asp-route-id="@Model.ProductID" type="submit" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
-            <span class="glyphicon glyphicon-trash"></span>
             Delete
         </button>
         <form id="delete-form" method="post" asp-action="Delete" style="display: none;" class="form-horizontal">

@@ -45,6 +45,7 @@ namespace eCommerce.cs
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
+            services.AddTransient<ISpecialTagRepository, SpecialTagRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
