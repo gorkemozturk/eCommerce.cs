@@ -49,5 +49,29 @@ namespace eCommerce.cs.Areas.Management.Controllers
 
             return View(productType);
         }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) return NotFound();
+
+            ProductType productType = _context.GetByID(id);
+
+            if (productType == null) return NotFound();
+
+            return View(productType);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, ProductType productType)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(productType);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productType);
+        }
     }
 }

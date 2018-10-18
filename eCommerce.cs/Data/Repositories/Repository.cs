@@ -43,6 +43,11 @@ namespace eCommerce.cs.Data.Repositories
             return _context.Set<T>();
         }
 
+        public T GetByID(int? id)
+        {
+            return _context.Set<T>().Find(id);
+        }
+
         public void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
