@@ -67,7 +67,7 @@ namespace eCommerce.cs
             {
                 routes.MapRoute(
                   name: "areas",
-                  template: "{area:Store}/{controller=Home}/{action=Index}/{id?}"
+                  template: "{area=Store}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
         }

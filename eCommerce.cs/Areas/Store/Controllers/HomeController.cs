@@ -8,6 +8,7 @@ using eCommerce.cs.Models;
 
 namespace eCommerce.cs.Controllers
 {
+    [Area("Store")]
     public class HomeController : Controller
     {
         public IActionResult Index()
