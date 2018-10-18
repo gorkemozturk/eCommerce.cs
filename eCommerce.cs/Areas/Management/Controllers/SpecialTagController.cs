@@ -75,5 +75,37 @@ namespace eCommerce.cs.Areas.Management.Controllers
 
             return View(specialTag);
         }
+
+        public IActionResult Show(int? id)
+        {
+            if (id == null) return NotFound();
+
+            SpecialTag specialTag = _context.GetByID(id);
+
+            if (specialTag == null) return NotFound();
+
+            return View(specialTag);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            SpecialTag specialTag = _context.GetByID(id);
+
+            if (specialTag == null) return NotFound();
+
+            return View(specialTag);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var specialTag = _context.GetByID(id);
+            _context.Delete(specialTag);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
