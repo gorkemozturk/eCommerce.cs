@@ -86,5 +86,26 @@ namespace eCommerce.cs.Areas.Management.Controllers
 
             return View(productType);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            ProductType productType = _context.GetByID(id);
+
+            if (productType == null) return NotFound();
+
+            return View(productType);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var productType = _context.GetByID(id);
+            _context.Delete(productType);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
