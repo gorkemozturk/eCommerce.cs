@@ -8,7 +8,7 @@
         DELETE THE EXISTING PRODUCT TYPE
     </div>
     <div class="panel-body text-center">
-        Are you sure you want to delete the <strong>@Model.ProductName</strong> product type?
+        Are you sure you want to delete the <strong>@Model.ProductTypeName</strong> product type?
     </div>
     <hr style="margin: 0" />
     <div class="panel-body text-center">
@@ -16,12 +16,12 @@
             <span class="glyphicon glyphicon-chevron-left"></span>
             Back to List
         </a>
-        <button asp-route-id="@Model.ProductID" type="submit" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+        <button asp-route-id="@Model.ProductTypeID" type="submit" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
             Delete
         </button>
         <form id="delete-form" method="post" asp-action="Delete" style="display: none;" class="form-horizontal">
-            <input type="hidden" asp-for="ProductID" />
-            <input asp-for="ProductName" disabled class="form-control" autocomplete="off">
+            <input type="hidden" asp-for="ProductTypeID" />
+            <input asp-for="ProductTypeName" disabled class="form-control" autocomplete="off">
         </form>
     </div>
 </div>

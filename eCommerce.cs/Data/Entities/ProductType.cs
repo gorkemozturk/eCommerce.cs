@@ -10,11 +10,11 @@ namespace eCommerce.cs.Data.Entities
     public class ProductType
     {
         [Key]
-        [DisplayName("Product ID")]
-        public int ProductID { get; set; }
+        [DisplayName("Product Type ID")]
+        public int ProductTypeID { get; set; }
 
         [Required]
         [DisplayName("Product Name")]
-        public string ProductName { get; set; }
+        public string ProductTypeName { get; set; }
     }
 }
