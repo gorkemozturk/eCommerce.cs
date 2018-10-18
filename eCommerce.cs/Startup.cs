@@ -66,8 +66,9 @@ namespace eCommerce.cs
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                  name: "areas",
+                  template: "{area:Store}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
         }
     }

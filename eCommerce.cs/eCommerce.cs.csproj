@@ -11,4 +11,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Management\Controllers\" />
+    <Folder Include="Areas\Management\Views\" />
+    <Folder Include="Areas\Store\Controllers\" />
+    <Folder Include="Areas\Store\Views\" />
+  </ItemGroup>
+
 </Project>
