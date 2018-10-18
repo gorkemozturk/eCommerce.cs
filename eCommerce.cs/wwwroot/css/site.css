@@ -48,6 +48,9 @@ body {
     border-radius: 0;
     text-transform: uppercase;
 }
+.btn-group .btn {
+    border-radius: 0;
+}
 
 /* Panel */
 .panel {
@@ -63,6 +66,19 @@ body {
 /* Alert */
 .alert {
     border-radius: 0;
+}
+
+/* Form */
+.form-horizontal .form-group .form-control {
+    border-radius: 0;
+}
+.form-horizontal .form-group .control-label {
+    font-weight: normal;
+}
+
+/* Table */
+.table thead th {
+    font-weight: normal;
 }
 
 /* Hide/rearrange for smaller screens */

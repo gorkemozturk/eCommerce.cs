@@ -1,4 +1,5 @@
-﻿using eCommerce.cs.Data.Interfaces;
+﻿using eCommerce.cs.Data.Entities;
+using eCommerce.cs.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,12 +24,30 @@ namespace eCommerce.cs.Areas.Management.Controllers
 
             if (productTypes.Count() == 0) return View(nameof(Empty));
 
-            return View();
+            return View(productTypes);
         }
 
         public IActionResult Empty()
         {
             return View();
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ProductType productType)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Create(productType);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(productType);
         }
     }
 }

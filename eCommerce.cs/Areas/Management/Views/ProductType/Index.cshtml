@@ -15,24 +15,26 @@
         <table style="margin: 0" class="table table-striped">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.ProductID)</th>
-                    <th>@Html.DisplayNameFor(model => model.ProductName)</th>
-                    <th>İşlemler</th>
+                    <th class="col-md-4">@Html.DisplayNameFor(model => model.ProductID)</th>
+                    <th class="col-md-4">@Html.DisplayNameFor(model => model.ProductName)</th>
+                    <th class="col-md-4 text-center">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductName)
-                    </td>
-                    <td></td>
-                </tr>
-            }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="col-md-4">
+                            @Html.DisplayFor(modelItem => item.ProductID)
+                        </td>
+                        <td class="col-md-4">
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td class="col-md-4 text-center">
+                            <partial name="_TableButtonsPartial" model="item.ProductID" />
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
