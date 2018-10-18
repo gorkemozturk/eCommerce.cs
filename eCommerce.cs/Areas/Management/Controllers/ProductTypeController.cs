@@ -65,6 +65,8 @@ namespace eCommerce.cs.Areas.Management.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, ProductType productType)
         {
+            if (id != productType.ProductID) return NotFound();
+
             if (ModelState.IsValid)
             {
                 _context.Update(productType);
