@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace eCommerce.cs.Data.Repositories
+namespace eCommerce.cs.Data.Interfaces
 {
     public interface IProductTypeRepository : IRepository<ProductType>
     {

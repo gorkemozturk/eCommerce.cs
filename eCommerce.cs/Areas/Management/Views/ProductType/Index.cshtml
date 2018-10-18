@@ -1,0 +1,39 @@
+﻿@model IEnumerable<eCommerce.cs.Data.Entities.ProductType>
+@{
+    ViewData["Title"] = "Product Types";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        PRODUCT TYPES
+    </div>
+    <div class="panel-body text-right">
+        <a asp-action="Create" class="btn btn-primary btn-sm">Create a New Product Type</a>
+    </div>
+    <hr style="margin: 0" />
+    <div style="padding: 0" class="panel-body">
+        <table style="margin: 0" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ProductID)</th>
+                    <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td></td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

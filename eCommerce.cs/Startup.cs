@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using eCommerce.cs.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using eCommerce.cs.Data.Interfaces;
+using eCommerce.cs.Data.Repositories;
 
 namespace eCommerce.cs
 {
@@ -41,6 +43,8 @@ namespace eCommerce.cs
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
