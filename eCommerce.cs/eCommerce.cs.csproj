@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\Management\Views\Product\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Areas\Management\Views\SpecialTag\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -47,6 +50,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
 </Project>

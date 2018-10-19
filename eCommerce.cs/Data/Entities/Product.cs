@@ -27,11 +27,9 @@ namespace eCommerce.cs.Data.Entities
         [Required]
         public decimal Price { get; set; }
 
-        [Required]
         public string Image { get; set; }
 
         [DisplayName("Available")]
-        [Required]
         public bool IsAvailable { get; set; }
 
         [ForeignKey("ProductTypeID")]

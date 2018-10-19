@@ -14,7 +14,7 @@ namespace eCommerce.cs.Data.Entities
         public int ProductTypeID { get; set; }
 
         [Required]
-        [DisplayName("Product Name")]
+        [DisplayName("Product Type Name")]
         public string ProductTypeName { get; set; }
     }
 }

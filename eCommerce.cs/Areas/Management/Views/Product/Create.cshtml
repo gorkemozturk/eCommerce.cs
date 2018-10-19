@@ -1,0 +1,72 @@
+﻿@model eCommerce.cs.Models.ProductViewModel
+@using eCommerce.cs.Extensions
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        CREATE A NEW PRODUCT
+    </div>
+    <div class="panel-body">
+        <form method="post" enctype="multipart/form-data" class="form-horizontal">
+            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+            <div class="form-group">
+                <label asp-for="Product.ProductName" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Product.ProductName" class="form-control" autocomplete="off">
+                    <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input asp-for="Product.Price" class="form-control" autocomplete="off">
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Image" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="file" name="files" class="form-control-file">
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.ProductType.ProductTypeName" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select class="form-control" asp-for="@Model.Product.ProductTypeID" asp-items="Model.ProductTypes.ToSeceltListProductType(Model.Product.ProductTypeID)"></select>
+                    <span asp-validation-for="Product.ProductType" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.SpecialTag.TagName" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select class="form-control" asp-for="@Model.Product.SpecialTagID" asp-items="Model.SpecialTags.ToSeceltListTag(Model.Product.ProductTypeID)"></select>
+                    <span asp-validation-for="Product.SpecialTag" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.IsAvailable" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" asp-for="Product.IsAvailable" class="form-check-input" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a asp-action="Index" class="btn btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        Back to List
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        Create
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts 
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
