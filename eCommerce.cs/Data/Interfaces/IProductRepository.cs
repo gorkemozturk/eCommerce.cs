@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace eCommerce.cs.Data.Interfaces
 {
-    public interface IProductTypeRepository : IRepository<ProductType>
+    public interface IProductRepository : IRepository<Product>
     {
-        IEnumerable<ProductType> GetAllWithProductTypes();
+        IEnumerable<Product> GetAllWithProductTypesAndSpecialTags();
     }
 }

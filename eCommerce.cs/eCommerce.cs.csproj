@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Areas\Management\Views\SpecialTag\Create.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -47,6 +43,10 @@
     <Content Update="Areas\Store\Views\_ViewStart.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

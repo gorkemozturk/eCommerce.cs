@@ -12,5 +12,10 @@ namespace eCommerce.cs.Data.Repositories
         public ProductTypeRepository(ApplicationDbContext context) : base(context)
         {
         }
+
+        public IEnumerable<ProductType> GetAllWithProductTypes()
+        {
+            return _context.ProductTypes;
+        }
     }
 }

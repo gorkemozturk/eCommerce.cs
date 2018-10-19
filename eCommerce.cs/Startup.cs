@@ -46,6 +46,7 @@ namespace eCommerce.cs
 
             services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
             services.AddTransient<ISpecialTagRepository, SpecialTagRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

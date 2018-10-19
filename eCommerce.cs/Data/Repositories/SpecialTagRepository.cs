@@ -12,5 +12,10 @@ namespace eCommerce.cs.Data.Repositories
         public SpecialTagRepository(ApplicationDbContext context) : base(context)
         {
         }
+
+        public IEnumerable<SpecialTag> GetAllWithSpecialTags()
+        {
+            return _context.SpecialTags;
+        }
     }
 }

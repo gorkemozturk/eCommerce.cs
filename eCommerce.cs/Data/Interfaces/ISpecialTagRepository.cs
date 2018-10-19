@@ -8,5 +8,6 @@ namespace eCommerce.cs.Data.Interfaces
 {
     public interface ISpecialTagRepository : IRepository<SpecialTag>
     {
+        IEnumerable<SpecialTag> GetAllWithSpecialTags();
     }
 }
