@@ -1,0 +1,66 @@
+﻿@model eCommerce.cs.Models.ProductViewModel
+@using eCommerce.cs.Extensions
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        EDIT THE EXINTING PRODUCT
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+                <form class="form" method="post" enctype="multipart/form-data">
+                    <input hidden asp-for="Product.ProductID" />
+                    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.ProductName" class="control-label"></label>
+                        <input style="border-radius: 0" asp-for="Product.ProductName" class="form-control" autocomplete="off">
+                        <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.Price" class="control-label"></label>
+                        <input style="border-radius: 0" asp-for="Product.Price" class="form-control" autocomplete="off">
+                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.Image" class="control-label"></label>
+                        <input type="file" name="files" class="form-control-file">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.ProductType.ProductTypeName" class="control-label"></label>
+                        <select style="border-radius: 0" class="form-control" asp-for="@Model.Product.ProductTypeID" asp-items="Model.ProductTypes.ToSeceltListProductType(Model.Product.ProductTypeID)"></select>
+                        <span asp-validation-for="Product.ProductType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.SpecialTag.TagName" class="control-label"></label>
+                        <select style="border-radius: 0" class="form-control" asp-for="@Model.Product.SpecialTagID" asp-items="Model.SpecialTags.ToSeceltListTag(Model.Product.ProductTypeID)"></select>
+                        <span asp-validation-for="Product.SpecialTag" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.IsAvailable" class="control-label"></label>
+                        <input type="checkbox" asp-for="Product.IsAvailable" class="form-check-input" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-default">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            Back to List
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Product.Image" alt="@Model.Product.ProductName" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

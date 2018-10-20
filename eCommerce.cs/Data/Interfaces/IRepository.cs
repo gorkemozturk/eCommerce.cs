@@ -9,7 +9,7 @@ namespace eCommerce.cs.Data.Interfaces
     {
         IEnumerable<T> GetAll();
         T GetByID(int? id);
-        IEnumerable<T> Find(Func<T, bool> predicate);
+        T Find(Func<T, bool> predicate);
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);

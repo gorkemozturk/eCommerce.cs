@@ -33,9 +33,9 @@ namespace eCommerce.cs.Data.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<T> Find(Func<T, bool> predicate)
+        public T Find(Func<T, bool> predicate)
         {
-            return _context.Set<T>().Where(predicate);
+            return _context.Set<T>().Where(predicate).SingleOrDefault();
         }
 
         public IEnumerable<T> GetAll()

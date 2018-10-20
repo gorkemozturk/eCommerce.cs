@@ -63,7 +63,7 @@ namespace eCommerce.cs.Areas.Management.Controllers
 
             if (files.Count != 0)
             {
-                var uploads = Path.Combine(webRootPath, StaticDetails.ImagePath);
+                var uploads = Path.Combine(webRootPath, ProductImageUtility.ImagePath);
                 var extension = Path.GetExtension(files[0].FileName);
 
                 using (var fileStream = new FileStream(Path.Combine(uploads, ProductViewModel.Product.ProductID + extension), FileMode.Create))
@@ -71,18 +71,74 @@ namespace eCommerce.cs.Areas.Management.Controllers
                     files[0].CopyTo(fileStream);
                 }
 
-                product.Image = @"\" + StaticDetails.ImagePath + @"\" + ProductViewModel.Product.ProductID + extension;
+                product.Image = @"\" + ProductImageUtility.ImagePath + @"\" + ProductViewModel.Product.ProductID + extension;
             }
             else
             {
-                var uploads = Path.Combine(webRootPath, StaticDetails.ImagePath + @"\" + StaticDetails.DefaultProductImage);
-                System.IO.File.Copy(uploads, webRootPath + @"\" + StaticDetails.ImagePath + @"\" + ProductViewModel.Product.ProductID + ".jpg");
-                product.Image = @"\" + StaticDetails.ImagePath + @"\" + ProductViewModel.Product.ProductID + ".jpg";
+                var uploads = Path.Combine(webRootPath, ProductImageUtility.ImagePath + @"\" + ProductImageUtility.DefaultProductImage);
+                System.IO.File.Copy(uploads, webRootPath + @"\" + ProductImageUtility.ImagePath + @"\" + ProductViewModel.Product.ProductID + ".jpg");
+                product.Image = @"\" + ProductImageUtility.ImagePath + @"\" + ProductViewModel.Product.ProductID + ".jpg";
             }
 
             _productRepository.Save();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) return NotFound();
+
+            ProductViewModel.Product = _productRepository.FindWithProductTypesAndSpecialTags(id);
+
+            if (ProductViewModel == null) return NotFound();
+
+            return View(ProductViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                string webRootPath = _hostingEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+                var product = _productRepository.Find(m => m.ProductID == ProductViewModel.Product.ProductID);
+
+                if (files[0].Length > 0 && files[0] != null)
+                {
+                    var uploads = Path.Combine(webRootPath, ProductImageUtility.ImagePath);
+                    var oldExtension = Path.GetExtension(files[0].FileName);
+                    var newExtension = Path.GetExtension(product.Image);
+
+                    if (System.IO.File.Exists(Path.Combine(uploads, ProductViewModel.Product.ProductID + oldExtension)))
+                    {
+                        System.IO.File.Delete(Path.Combine(uploads, ProductViewModel.Product.ProductID + oldExtension));
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(uploads, ProductViewModel.Product.ProductID + newExtension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    ProductViewModel.Product.Image = @"\" + ProductImageUtility.ImagePath + @"\" + ProductViewModel.Product.ProductID + newExtension;
+                }
+
+                if (ProductViewModel.Product.Image != null) product.Image = ProductViewModel.Product.Image;
+
+                product.ProductName = ProductViewModel.Product.ProductName;
+                product.Price = ProductViewModel.Product.Price;
+                product.IsAvailable = ProductViewModel.Product.IsAvailable;
+                product.ProductTypeID = ProductViewModel.Product.ProductTypeID;
+                product.SpecialTagID = ProductViewModel.Product.SpecialTagID;
+
+                _productRepository.Save();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(ProductViewModel);
         }
     }
 }

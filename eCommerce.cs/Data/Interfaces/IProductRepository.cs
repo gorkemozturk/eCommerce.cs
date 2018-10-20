@@ -9,5 +9,6 @@ namespace eCommerce.cs.Data.Interfaces
     public interface IProductRepository : IRepository<Product>
     {
         IEnumerable<Product> GetAllWithProductTypesAndSpecialTags();
+        Product FindWithProductTypesAndSpecialTags(int? id);
     }
 }

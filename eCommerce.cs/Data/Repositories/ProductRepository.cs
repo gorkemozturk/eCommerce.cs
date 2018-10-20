@@ -14,9 +14,14 @@ namespace eCommerce.cs.Data.Repositories
         {
         }
 
+        public Product FindWithProductTypesAndSpecialTags(int? id)
+        {
+            return _context.Set<Product>().Include(a => a.ProductType).Include(a => a.SpecialTag).SingleOrDefault(a => a.ProductID == id);
+        }
+
         public IEnumerable<Product> GetAllWithProductTypesAndSpecialTags()
         {
-            return _context.Products.Include(a => a.ProductType).Include(a => a.SpecialTag);
+            return _context.Set<Product>().Include(a => a.ProductType).Include(a => a.SpecialTag);
         }
     }
 }
