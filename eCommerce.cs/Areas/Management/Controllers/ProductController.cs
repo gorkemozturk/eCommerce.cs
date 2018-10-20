@@ -34,7 +34,7 @@ namespace eCommerce.cs.Areas.Management.Controllers
             {
                 ProductTypes = _productTypeRepository.GetAllWithProductTypes(),
                 SpecialTags = _specialTagRepository.GetAllWithSpecialTags(),
-                Product = new Data.Entities.Product()
+                Product = new Product()
             };
         }
 

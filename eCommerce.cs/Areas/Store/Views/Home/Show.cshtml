@@ -1,0 +1,59 @@
+﻿@model eCommerce.cs.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        @Model.Product.ProductName
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+                <strong>DESCRIPTION</strong>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    It has survived not only five centuries, but also the leap into electronic typesetting,
+                    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+                    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>PRICE</strong>
+                        <p>@String.Format("{0:c}", Model.Product.Price)</p>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>AVAILABILITY</strong>
+                        @if (Model.Product.IsAvailable)
+                        {
+                            <p class="text-success">In Stock</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger">Out of Stock</p>
+                        }
+                    </div>
+                </div>
+
+                <hr />
+
+                <span style="border-radius: 0" class="label label-primary">@Model.Product.ProductType.ProductTypeName.ToUpper()</span>
+                <span style="border-radius: 0" class="label label-success">@Model.Product.SpecialTag.TagName.ToUpper()</span>
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Product.Image" alt="@Model.Product.ProductName" class="img-responsive">
+
+                <hr />
+
+                <a class="btn btn-success btn-block">
+                    Add to Card
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

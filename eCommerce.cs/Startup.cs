@@ -47,6 +47,11 @@ namespace eCommerce.cs
             services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
             services.AddTransient<ISpecialTagRepository, SpecialTagRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
+                options.Cookie.HttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +73,8 @@ namespace eCommerce.cs
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

@@ -21,7 +21,7 @@ namespace eCommerce.cs.Data.Repositories
 
         public IEnumerable<Product> GetAllWithProductTypesAndSpecialTags()
         {
-            return _context.Set<Product>().Include(a => a.ProductType).Include(a => a.SpecialTag);
+            return _context.Set<Product>().Include(a => a.ProductType).Include(a => a.SpecialTag).ToList();
         }
     }
 }
