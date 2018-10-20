@@ -106,7 +106,7 @@ namespace eCommerce.cs.Areas.Management.Controllers
                 var files = HttpContext.Request.Form.Files;
                 var product = _productRepository.Find(m => m.ProductID == ProductViewModel.Product.ProductID);
 
-                if (files[0].Length > 0 && files[0] != null)
+                if (files.Count > 0 && files[0] != null)
                 {
                     var uploads = Path.Combine(webRootPath, ProductImageUtility.ImagePath);
                     var oldExtension = Path.GetExtension(files[0].FileName);
