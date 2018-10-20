@@ -18,8 +18,8 @@
                     <th class="col-md-2">@Html.DisplayNameFor(model => model.ProductID)</th>
                     <th class="col-md-2">@Html.DisplayNameFor(model => model.ProductName)</th>
                     <th class="col-md-2">@Html.DisplayNameFor(model => model.Price)</th>
-                    <th class="col-md-2">@Html.DisplayNameFor(model => model.ProductType)</th>
-                    <th class="col-md-2">@Html.DisplayNameFor(model => model.SpecialTag)</th>
+                    <th class="col-md-2">@Html.DisplayNameFor(model => model.ProductType.ProductTypeName)</th>
+                    <th class="col-md-2">@Html.DisplayNameFor(model => model.SpecialTag.TagName)</th>
                     <th class="col-md-2 text-center">İşlemler</th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                             @Html.DisplayFor(modelItem => item.ProductName)
                         </td>
                         <td class="col-md-2">
-                            @Html.DisplayFor(modelItem => item.Price)
+                            @String.Format("{0:c}", item.Price)
                         </td>
                         <td class="col-md-2">
                             @Html.DisplayFor(modelItem => item.ProductType.ProductTypeName)

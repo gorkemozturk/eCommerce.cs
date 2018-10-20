@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using eCommerce.cs.Data.Entities;
 using eCommerce.cs.Data.Interfaces;
 using eCommerce.cs.Models;
 using eCommerce.cs.Utilities;
@@ -41,7 +42,14 @@ namespace eCommerce.cs.Areas.Management.Controllers
         {
             var products = _productRepository.GetAllWithProductTypesAndSpecialTags();
 
+            if (products.Count() == 0) return View(nameof(Empty));
+
             return View(products);
+        }
+
+        public IActionResult Empty()
+        {
+            return View();
         }
 
         public IActionResult Create()
@@ -139,6 +147,55 @@ namespace eCommerce.cs.Areas.Management.Controllers
             }
 
             return View(ProductViewModel);
+        }
+
+        public IActionResult Show(int? id)
+        {
+            if (id == null) return NotFound();
+
+            ProductViewModel.Product = _productRepository.FindWithProductTypesAndSpecialTags(id);
+
+            if (ProductViewModel == null) return NotFound();
+
+            return View(ProductViewModel);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            ProductViewModel.Product = _productRepository.FindWithProductTypesAndSpecialTags(id);
+
+            if (ProductViewModel == null) return NotFound();
+
+            return View(ProductViewModel);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            Product product = _productRepository.GetByID(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var upload = Path.Combine(webRootPath, ProductImageUtility.ImagePath);
+                var extension = Path.GetExtension(product.Image);
+
+                if (System.IO.File.Exists(Path.Combine(upload, product.ProductID + extension)))
+                {
+                    System.IO.File.Delete(Path.Combine(upload, product.ProductID + extension));
+                }
+
+                _productRepository.Delete(product);
+
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

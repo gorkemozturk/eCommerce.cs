@@ -1,0 +1,27 @@
+﻿@model eCommerce.cs.Models.ProductViewModel
+@using eCommerce.cs.Extensions
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        DELETE THE EXINTING PRODUCT
+    </div>
+    <div class="panel-body text-center">
+        Are you sure you want to delete the <strong>@Model.Product.ProductName</strong> product?
+    </div>
+    <hr style="margin: 0" />
+    <div class="panel-body text-center">
+        <a asp-action="Index" class="btn btn-default">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Back to List
+        </a>
+        <button type="submit" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();">
+            Delete
+        </button>
+        <form id="delete-form" style="display: none" method="post">
+            <input hidden asp-for="Product.ProductID" />
+        </form>
+    </div>
+</div>

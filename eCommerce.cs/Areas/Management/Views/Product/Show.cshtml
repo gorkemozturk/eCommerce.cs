@@ -1,0 +1,51 @@
+﻿@model eCommerce.cs.Models.ProductViewModel
+@using eCommerce.cs.Extensions
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        DETAILS THE EXINTING PRODUCT
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+                <form class="form">
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.ProductName" class="control-label"></label>
+                        <input style="border-radius: 0" asp-for="Product.ProductName" readonly class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.Price" class="control-label"></label>
+                        <input style="border-radius: 0" asp-for="Product.Price" readonly class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.ProductType.ProductTypeName" class="control-label"></label>
+                        <input style="border-radius: 0" asp-for="Product.ProductType.ProductTypeName" readonly class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.SpecialTag.TagName" class="control-label"></label>
+                        <input style="border-radius: 0" asp-for="Product.SpecialTag.TagName" readonly class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight: normal" asp-for="Product.IsAvailable" class="control-label"></label>
+                        <input type="checkbox" asp-for="Product.IsAvailable" readonly class="form-check-input">
+                    </div>
+                    <div class="form-group">
+                        <a asp-action="Index" class="btn btn-default">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            Back to List
+                        </a>
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Product.ProductID">
+                            Edit
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Product.Image" alt="@Model.Product.ProductName" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
