@@ -1,11 +1,11 @@
-﻿@model eCommerce.cs.Models.ProductViewModel
+﻿@model eCommerce.cs.Data.Entities.Product
 @{
     ViewData["Title"] = "Product Details";
 }
 
 <div class="panel panel-default">
     <div class="panel-heading text-center">
-        @Model.Product.ProductName
+        @Model.ProductName
     </div>
     <div class="panel-body">
         <div class="row">
@@ -25,11 +25,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <strong>PRICE</strong>
-                        <p>@String.Format("{0:c}", Model.Product.Price)</p>
+                        <p>@String.Format("{0:c}", Model.Price)</p>
                     </div>
                     <div class="col-md-6">
                         <strong>AVAILABILITY</strong>
-                        @if (Model.Product.IsAvailable)
+                        @if (Model.IsAvailable)
                         {
                             <p class="text-success">In Stock</p>
                         }
@@ -42,17 +42,40 @@
 
                 <hr />
 
-                <span style="border-radius: 0" class="label label-primary">@Model.Product.ProductType.ProductTypeName.ToUpper()</span>
-                <span style="border-radius: 0" class="label label-success">@Model.Product.SpecialTag.TagName.ToUpper()</span>
+                <span style="border-radius: 0" class="label label-primary">@Model.ProductType.ProductTypeName</span>
+                <span style="border-radius: 0" class="label label-success">@Model.SpecialTag.TagName</span>
             </div>
             <div class="col-md-4">
-                <img src="@Model.Product.Image" alt="@Model.Product.ProductName" class="img-responsive">
+                <img src="@Model.Image" alt="@Model.ProductName" class="img-responsive">
 
                 <hr />
+                @{
+                    bool isInCart = false;
+                    List<int> cart = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ShoppingCart");
+                    if (cart != null && cart.Contains(Model.ProductID))
+                    {
+                        isInCart = true;
+                    }
+                }
 
-                <a class="btn btn-success btn-block">
-                    Add to Card
-                </a>
+                @if (isInCart)
+                {
+                    <form method="post">
+                        <input hidden asp-for="ProductID" />
+                        <button asp-action="DeleteFromCart" asp-route-id="@Model.ProductID" class="btn btn-danger btn-block">
+                            Remove From Card
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <form method="post">
+                        <input hidden asp-for="ProductID" />
+                        <button asp-route-id="@Model.ProductID" class="btn btn-success btn-block">
+                            Add to Card
+                        </button>
+                    </form>
+                }
             </div>
         </div>
     </div>

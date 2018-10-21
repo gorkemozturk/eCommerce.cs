@@ -8,6 +8,7 @@ using eCommerce.cs.Data;
 using eCommerce.cs.Data.Interfaces;
 using eCommerce.cs.Models;
 using eCommerce.cs.Data.Entities;
+using eCommerce.cs.Extensions;
 
 namespace eCommerce.cs.Controllers
 {
@@ -15,22 +16,10 @@ namespace eCommerce.cs.Controllers
     public class HomeController : Controller
     {
         private readonly IProductRepository _productRepository;
-        private readonly IProductTypeRepository _productTypeRepository;
-        private readonly ISpecialTagRepository _specialTagRepository;
-        public ProductViewModel ProductViewModel { get; }
 
-        public HomeController(IProductRepository productRepository, IProductTypeRepository productTypeRepository, ISpecialTagRepository specialTagRepository)
+        public HomeController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _productTypeRepository = productTypeRepository;
-            _specialTagRepository = specialTagRepository;
-
-            ProductViewModel = new ProductViewModel()
-            {
-                ProductTypes = _productTypeRepository.GetAllWithProductTypes(),
-                SpecialTags = _specialTagRepository.GetAllWithSpecialTags(),
-                Product = new Product()
-            };
         }
 
         public IActionResult Index()
@@ -42,9 +31,37 @@ namespace eCommerce.cs.Controllers
 
         public IActionResult Show(int id)
         {
-            ProductViewModel.Product = _productRepository.FindWithProductTypesAndSpecialTags(id);
+            var product = _productRepository.FindWithProductTypesAndSpecialTags(id);
 
-            return View(ProductViewModel);
+            return View(product);
+        }
+
+        [HttpPost, ActionName("Show")]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddToCart(int id)
+        {
+            List<int> shoppingCart = HttpContext.Session.Get<List<int>>("ShoppingCart");
+
+            if (shoppingCart == null) shoppingCart = new List<int>();
+
+            shoppingCart.Add(id);
+            HttpContext.Session.Set("ShoppingCart", shoppingCart);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult DeleteFromCart(int id)
+        {
+            List<int> shoppingCart = HttpContext.Session.Get<List<int>>("ShoppingCart");
+
+            if (shoppingCart.Count > 0)
+            {
+                if (shoppingCart.Contains(id)) shoppingCart.Remove(id);
+            }
+
+            HttpContext.Session.Set("ShoppingCart", shoppingCart);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

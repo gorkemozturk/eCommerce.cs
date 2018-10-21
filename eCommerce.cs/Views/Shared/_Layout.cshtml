@@ -34,6 +34,27 @@
                     <li><a asp-area="Management" asp-controller="ProductType" asp-action="Index">Product Types</a></li>
                     <li><a asp-area="Management" asp-controller="SpecialTag" asp-action="Index">Special Tags</a></li>
                     <li><a asp-area="Management" asp-controller="Product" asp-action="Index">Products</a></li>
+                    @if (HttpContextAccessor.HttpContext.Session.Get<List<int>>("ShoppingCart") != null)
+                    {
+                        <li>
+                            <a asp-area="Store" asp-controller="ShoppingCart" asp-action="Index">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                @{
+                                    var counter = HttpContextAccessor.HttpContext.Session.Get<List<int>>("ShoppingCart").Count();
+                                }
+                                (@counter)
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-area="Store" asp-controller="ShoppingCart" asp-action="Index">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                (0)
+                            </a>
+                        </li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
