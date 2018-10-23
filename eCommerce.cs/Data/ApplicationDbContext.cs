@@ -16,5 +16,7 @@ namespace eCommerce.cs.Data
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<SpecialTag> SpecialTags { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

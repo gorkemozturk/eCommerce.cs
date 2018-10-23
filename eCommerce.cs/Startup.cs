@@ -47,6 +47,8 @@ namespace eCommerce.cs
             services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
             services.AddTransient<ISpecialTagRepository, SpecialTagRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(15);

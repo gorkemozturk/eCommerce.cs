@@ -1,0 +1,86 @@
+﻿@model eCommerce.cs.Models.ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        Shopping Cart
+    </div>
+    <hr style="margin: 0" />
+    @if (Model.Products.Count > 0)
+    {
+        <div style="padding: 0" class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <form method="post">
+                        <table style="margin: 0" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-2"><label style="font-weight: normal" asp-for="@Model.Products.FirstOrDefault().Image"></label></th>
+                                    <th class="col-md-2"><label style="font-weight: normal" asp-for="@Model.Products.FirstOrDefault().ProductName"></label></th>
+                                    <th class="col-md-2"><label style="font-weight: normal" asp-for="@Model.Products.FirstOrDefault().Price"></label></th>
+                                    <th class="col-md-2"><label style="font-weight: normal" asp-for="@Model.Products.FirstOrDefault().ProductType.ProductTypeName"></label></th>
+                                    <th class="col-md-2"><label style="font-weight: normal" asp-for="@Model.Products.FirstOrDefault().SpecialTag.TagName"></label></th>
+                                    <th class="col-md-2 text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Products)
+                                {
+                                    <tr>
+                                        <td class="col-md-2">
+                                            <a asp-area="Store" asp-controller="Home" asp-action="Show" asp-route-id="@item.ProductID">
+                                                <img class="img-responsive" src="@item.Image" />
+                                            </a>
+                                        </td>
+                                        <td style="vertical-align: middle" class="col-md-2">@item.ProductName</td>
+                                        <td style="vertical-align: middle" class="col-md-2">@item.Price</td>
+                                        <td style="vertical-align: middle" class="col-md-2">@item.ProductType.ProductTypeName</td>
+                                        <td style="vertical-align: middle" class="col-md-2">@item.SpecialTag.TagName</td>
+                                        <td style="vertical-align: middle" class="col-md-2 text-center">
+                                            <button class="btn btn-danger btn-sm">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <hr />
+                <div class="col-md-4">
+                    <form method="post" style="padding: 1em">
+                        <div class="form-group">
+                            <label style="font-weight: normal" asp-for="@Model.Order.CustomerName"></label>
+                            <input style="border-radius: 0" class="form-control" asp-for="@Model.Order.CustomerName" />
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: normal" asp-for="@Model.Order.CustomerPhoneNumber"></label>
+                            <input style="border-radius: 0" class="form-control" asp-for="@Model.Order.CustomerPhoneNumber" />
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: normal" asp-for="@Model.Order.CustomerEmail"></label>
+                            <input style="border-radius: 0" class="form-control" asp-for="@Model.Order.CustomerEmail" />
+                        </div>
+                        <div class="form-group">
+                            <label style="font-weight: normal" asp-for="@Model.Order.Cost"></label>
+                            <input style="border-radius: 0" class="form-control" asp-for="@Model.Order.Cost" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel-body">
+            <div style="margin: 0" class="alert alert-info" role="alert">
+                There in no any item in your shoppning cart.
+            </div>
+        </div>
+    }
+</div>
+
