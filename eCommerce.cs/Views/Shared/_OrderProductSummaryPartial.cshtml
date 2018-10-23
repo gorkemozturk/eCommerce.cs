@@ -1,0 +1,41 @@
+﻿@model List<eCommerce.cs.Data.Entities.Product>
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        Product Summary
+    </div>
+    @if (Model.Count > 0)
+    {
+        <div style="padding: 0" class="panel-body">
+            <table style="margin: 0" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-3"><label style="font-weight: normal" asp-for="@Model.FirstOrDefault().ProductName"></label></th>
+                        <th class="col-md-3"><label style="font-weight: normal" asp-for="@Model.FirstOrDefault().Price"></label></th>
+                        <th class="col-md-3"><label style="font-weight: normal" asp-for="@Model.FirstOrDefault().ProductType.ProductTypeName"></label></th>
+                        <th class="col-md-3"><label style="font-weight: normal" asp-for="@Model.FirstOrDefault().SpecialTag.TagName"></label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="vertical-align: middle" class="col-md-3">@item.ProductName</td>
+                            <td style="vertical-align: middle" class="col-md-3">@item.Price</td>
+                            <td style="vertical-align: middle" class="col-md-3">@item.ProductType.ProductTypeName</td>
+                            <td style="vertical-align: middle" class="col-md-3">@item.SpecialTag.TagName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="panel-body">
+            <div style="margin: 0" class="alert alert-info" role="alert">
+                There in no any item in your shoppning cart.
+            </div>
+        </div>
+    }
+</div>

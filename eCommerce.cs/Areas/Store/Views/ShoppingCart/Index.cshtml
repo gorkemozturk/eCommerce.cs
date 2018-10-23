@@ -39,7 +39,7 @@
                                         <td style="vertical-align: middle" class="col-md-2">@item.ProductType.ProductTypeName</td>
                                         <td style="vertical-align: middle" class="col-md-2">@item.SpecialTag.TagName</td>
                                         <td style="vertical-align: middle" class="col-md-2 text-center">
-                                            <button class="btn btn-danger btn-sm">
+                                            <button type="submit" asp-controller="ShoppingCart" asp-action="DeleteFromCart" asp-route-id="@item.ProductID" class="btn btn-danger btn-sm">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </td>
@@ -49,9 +49,8 @@
                         </table>
                     </form>
                 </div>
-                <hr />
                 <div class="col-md-4">
-                    <form method="post" style="padding: 1em">
+                    <form asp-controller="Order" asp-action="Store" method="post" style="padding: 1em">
                         <div class="form-group">
                             <label style="font-weight: normal" asp-for="@Model.Order.CustomerName"></label>
                             <input style="border-radius: 0" class="form-control" asp-for="@Model.Order.CustomerName" />

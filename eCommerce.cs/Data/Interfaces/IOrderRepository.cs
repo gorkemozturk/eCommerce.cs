@@ -8,5 +8,6 @@ namespace eCommerce.cs.Data.Interfaces
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        Order FindOrder(int? id);
     }
 }

@@ -8,5 +8,6 @@ namespace eCommerce.cs.Data.Interfaces
 {
     public interface IOrderDetailRepository : IRepository<OrderDetail>
     {
+        List<OrderDetail> GetAllWithOrder(int? id);
     }
 }

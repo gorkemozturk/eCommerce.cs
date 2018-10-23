@@ -12,5 +12,10 @@ namespace eCommerce.cs.Data.Repositories
         public OrderDetailRepository(ApplicationDbContext context) : base(context)
         {
         }
+
+        public List<OrderDetail> GetAllWithOrder(int? id)
+        {
+            return _context.Set<OrderDetail>().Where(o => o.OrderID == id).ToList();
+        }
     }
 }

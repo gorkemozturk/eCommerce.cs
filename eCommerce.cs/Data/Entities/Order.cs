@@ -22,8 +22,8 @@ namespace eCommerce.cs.Data.Entities
         [DisplayName("Email")]
         public string CustomerEmail { get; set; }
 
-        [DisplayName("Cost")]
         public decimal Cost { get; set; }
         public bool IsConfirmed { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

@@ -1,0 +1,8 @@
+﻿@model eCommerce.cs.Models.ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Order Summary";
+}
+
+<partial name="~/Views/Shared/_OrderSummaryPartial.cshtml" model="Model.Order" />
+<partial name="~/Views/Shared/_OrderProductSummaryPartial.cshtml" model="Model.Products" />
+

@@ -49,28 +49,29 @@ namespace eCommerce.cs.Areas.Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("Index")]
-        public IActionResult Store()
+        public IActionResult AddToCart(int id)
         {
             List<int> shoppingCart = HttpContext.Session.Get<List<int>>("ShoppingCart");
 
-            Order order = ShoppingCartViewModel.Order;
-            _orderRepository.Create(order);
+            if (shoppingCart == null) shoppingCart = new List<int>();
 
-            int orderID = order.OrderID;
+            shoppingCart.Add(id);
+            HttpContext.Session.Set("ShoppingCart", shoppingCart);
 
-            foreach (int productID in shoppingCart)
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteFromCart(int id)
+        {
+            List<int> shoppingCart = HttpContext.Session.Get<List<int>>("ShoppingCart");
+
+            if (shoppingCart.Count > 0)
             {
-                OrderDetail orderDetail = new OrderDetail() {
-                    OrderID = orderID,
-                    ProductID = productID
-                };
-
-                _orderDetailRepository.Create(orderDetail);
+                if (shoppingCart.Contains(id)) shoppingCart.Remove(id);
             }
 
-            _orderDetailRepository.Save();
-            shoppingCart = new List<int>();
             HttpContext.Session.Set("ShoppingCart", shoppingCart);
 
             return RedirectToAction(nameof(Index));

@@ -62,7 +62,7 @@
                 {
                     <form method="post">
                         <input hidden asp-for="ProductID" />
-                        <button asp-action="DeleteFromCart" asp-route-id="@Model.ProductID" class="btn btn-danger btn-block">
+                        <button asp-controller="ShoppingCart" asp-action="DeleteFromCart" asp-route-id="@Model.ProductID" class="btn btn-danger btn-block">
                             Remove From Card
                         </button>
                     </form>
@@ -71,7 +71,7 @@
                 {
                     <form method="post">
                         <input hidden asp-for="ProductID" />
-                        <button asp-route-id="@Model.ProductID" class="btn btn-success btn-block">
+                        <button asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.ProductID" class="btn btn-success btn-block">
                             Add to Card
                         </button>
                     </form>

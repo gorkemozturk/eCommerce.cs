@@ -1,0 +1,33 @@
+﻿@model eCommerce.cs.Data.Entities.Order
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        Order Summary
+    </div>
+    <div class="panel-body">
+        <div style="margin: 0" class="alert alert-info" role="alert">
+            Your order has submitted. It will be checked and returned to you in a short time.
+        </div>
+    </div>
+    <hr style="margin: 0" />
+    <div style="padding: 0" class="panel-body">
+        <table style="margin: 0" class="table table-striped">
+            <thead>
+                <tr>
+                    <th><label style="font-weight: normal" asp-for="@Model.CustomerName"></label></th>
+                    <th><label style="font-weight: normal" asp-for="@Model.CustomerEmail"></label></th>
+                    <th><label style="font-weight: normal" asp-for="@Model.CustomerPhoneNumber"></label></th>
+                    <th><label style="font-weight: normal" asp-for="@Model.CreatedAt"></label></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.CustomerName</td>
+                    <td>@Model.CustomerEmail</td>
+                    <td>@Model.CustomerPhoneNumber</td>
+                    <td>@Model.CreatedAt</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
